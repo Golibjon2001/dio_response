@@ -19,13 +19,13 @@ class HomeRepository {
 
 
 
-  Future<List<HomeModel>> delete(postId) async {
+  Future<HomeModel> delete(postId) async {
     final dio = Dio();
     Response response = await dio.delete(
         "https://61f2ded52219930017f5094a.mockapi.io/api/contacts/$postId");
     if (response.statusCode == 200) {
-      Map<String, dynamic> data = response.data;
-      List<HomeModel> homeModels = [HomeModel.fromJson(data)];
+      final data = response.data;
+      HomeModel homeModels = HomeModel.fromJson(data);
       return homeModels;
     }
     return null!;

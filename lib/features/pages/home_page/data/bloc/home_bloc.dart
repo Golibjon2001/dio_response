@@ -10,7 +10,7 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const HomeState(homeModel: [], status:FormzStatus.pure, isDelete:false)) {
+  HomeBloc() : super(const HomeState(status:FormzStatus.pure, isDelete:false)) {
     HomeRepository homeRepository=HomeRepository();
     on<HomeLoadEvent>((event, emit) async{
       emit(state.copyWith(status:FormzStatus.submissionInProgress));
@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeDeleteEvent>((event, emit) async{
       emit(state.copyWith(status:FormzStatus.submissionInProgress,isDelete:false));
       final respons=await homeRepository.delete(event.homeModel!.id.toString());
-      emit(state.copyWith(status:FormzStatus.submissionSuccess,homeModel:respons,isDelete:true));
+      emit(state.copyWith(status:FormzStatus.submissionSuccess,homeModelDelete:respons,isDelete:true));
     });
   }
 }

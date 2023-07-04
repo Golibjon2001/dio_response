@@ -1,4 +1,5 @@
 import 'package:diorequest/features/pages/add_page/add_page.dart';
+import 'package:diorequest/features/pages/home_page/data/home_model.dart';
 import 'package:diorequest/features/pages/home_page/widgets/home_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           } else if (state.status!.isSubmissionInProgress) {
             return const Center(child: CircularProgressIndicator());
           } else if (state.status!.isSubmissionSuccess) {
-            return state.homeModel == null || state.homeModel!.isEmpty
+            return state.homeModel == null||state.homeModel!.isEmpty
                 ? const Center(
                     child: Text(
                     "No Data",
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                     child: ListView.builder(
                         padding:
                             const EdgeInsets.only(top: 20, left: 16, right: 16),
-                        itemCount: state.homeModel!.length,
+                        itemCount:state.homeModel!.length,
                         itemBuilder: (context, index) {
                           return homeWidgets(state.homeModel![index], context);
                         }),
